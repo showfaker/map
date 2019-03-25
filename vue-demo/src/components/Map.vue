@@ -31,17 +31,24 @@ export default {
     };
   },
   mounted() {
+    this.getMapData();
     this.initChart();
   },
   methods: {
-    initChart() {
-      //请求地址
-      let api = 'http://127.0.0.1:3006/privance';
-      Axios.get(api).then((response) => {  
-        this.list = response;
-      }).catch(() => {
-        // console.log(error);
+    getMapData(){
+      return new Promise((resolve, reject) => {
+        //请求地址
+        let api = 'http://127.0.0.1:3006/privance';
+        Axios.get(api).then((response) => {  
+          resolve(response.data.data);
+        }).catch((err) => {
+          reject(err);
+        })
       })
+    },
+    async initChart() {
+      //获取省份人口数
+      var privanceData = await this.getMapData();
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById("myChart"));
       // 绘制图表
@@ -87,10 +94,10 @@ export default {
               coordinateSystem: 'geo' // 对应上方配置
             },
             {
-              name: '人口分布/个', // 浮动框的标题
+              name: '人口统计数', // 浮动框的标题
               type: 'map',
               geoIndex: 0,
-              data: this.list.data
+              data: privanceData
             }
           ]
       });

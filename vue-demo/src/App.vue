@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Map/>
+    <!-- <Bar/> -->
   </div>
 </template>
 
 <script>
 import Map from './components/Map.vue'
+// import Bar from './components/Bar.vue'
 
 export default {
   name: 'app',
   components: {
-    Map
+    Map,
+    // Bar
   }
 }
 </script>
