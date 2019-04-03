@@ -3,7 +3,7 @@ const Koa = require("koa"),
     bodyParser = require("koa-bodyparser"),
     cors = require('koa2-cors');
 var index = require("./routes/admin");
-var app = new Koa();
+var app = new Koa();    //koa框架实例化
 
 // 具体参数我们在后面进行解释
 app.use(cors({
